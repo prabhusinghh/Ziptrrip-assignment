@@ -5,6 +5,39 @@ A full-stack Todo application built for the **Ziptrrip Developer Assignment**.
 The solution follows the requirement of building a **Multi-Page Application (MPA)** in React rather than a standard Single Page Application (SPA), paired with a Node.js + Express backend persisting data to a local JSON file. It features an interactive, colorful **Sticky Notes Board** design.
 
 ---
+## 💻 Getting Started Locally
+
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm
+
+### 1. Run the Backend
+
+Open a terminal and run:
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+The backend server will start on **`http://localhost:4000`**.
+
+### 2. Run the Frontend
+
+Open a second terminal and run:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend will start at **`http://localhost:5173/index.html`**.
+
+*(Optional: If running the backend on a different port/host, configure `VITE_API_BASE` in a `frontend/.env` file).*
+
+---
 
 ## 📌 Requirements & How They Are Met
 
@@ -100,40 +133,6 @@ todolist/
     │       └── detail/     # Sticky note detail component
     └── package.json
 ```
-
----
-
-## 💻 Getting Started Locally
-
-### Prerequisites
-- Node.js (v18 or higher recommended)
-- npm
-
-### 1. Run the Backend
-
-Open a terminal and run:
-
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-The backend server will start on **`http://localhost:4000`**.
-
-### 2. Run the Frontend
-
-Open a second terminal and run:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-The frontend will start at **`http://localhost:5173/index.html`**.
-
-*(Optional: If running the backend on a different port/host, configure `VITE_API_BASE` in a `frontend/.env` file).*
 
 ---
 
