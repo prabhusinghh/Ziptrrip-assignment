@@ -1,4 +1,3 @@
-import crypto from 'node:crypto';
 import { readTodos, writeTodos } from '../store.js';
 import { ALLOWED_PRIORITIES, normalizeTags, validateTodo } from '../utils/todoValidation.js';
 
@@ -49,14 +48,32 @@ export async function getTodoById(req, res, next) {
   }
 }
 
+function generateNextId(todos) {
+  let maxNum = 0;
+  for (const todo of todos) {
+    if (typeof todo.id === 'string') {
+      const match = todo.id.match(/^todo-(\d+)$/i);
+      if (match) {
+        const num = parseInt(match[1], 10);
+        if (!isNaN(num) && num > maxNum) {
+          maxNum = num;
+        }
+      }
+    }
+  }
+  const nextNum = maxNum + 1;
+  return `todo-${String(nextNum).padStart(3, '0')}`;
+}
+
 export async function createTodo(req, res, next) {
   try {
     const errors = validateTodo(req.body);
     if (errors.length) return res.status(400).json({ error: errors[0], errors });
 
+    const todos = await readTodos();
     const now = new Date().toISOString();
     const todo = {
-      id: crypto.randomUUID(),
+      id: generateNextId(todos),
       title: req.body.title.trim(),
       description: String(req.body.description || '').trim(),
       completed: Boolean(req.body.completed),
@@ -67,7 +84,6 @@ export async function createTodo(req, res, next) {
       updatedAt: now
     };
 
-    const todos = await readTodos();
     todos.push(todo);
     await writeTodos(todos);
     res.status(201).json(todo);
