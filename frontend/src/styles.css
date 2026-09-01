@@ -29,7 +29,11 @@ textarea { resize:vertical; min-height:100px; }
 .button { border:0; border-radius:12px; padding:10px 14px; font-weight:700; background:#171b2e; color:#fff; }
 .button.secondary { background:#eef1f7; color:#273047; }
 .button.danger { background:#fff0f0; color:#b42318; }
+.button.small-btn { padding:6px 10px; font-size:.8rem; text-decoration:none; display:inline-flex; align-items:center; }
 .button:disabled { opacity:.55; cursor:not-allowed; }
+.card-actions { display:flex; gap:6px; align-items:center; flex-shrink:0; }
+.id-pill { font-family:monospace; font-size:.74rem; font-weight:700; background:#e8ecf4; color:#3d4663; text-decoration:none; cursor:pointer; }
+.id-pill:hover { background:#dbe1ee; }
 .todo-list { display:flex; flex-direction:column; gap:10px; }
 .todo-card { border:1px solid #e7eaf0; border-radius:16px; padding:15px; display:flex; gap:12px; align-items:flex-start; transition:.18s ease; }
 .todo-card:hover { transform:translateY(-1px); border-color:#cfd5e3; box-shadow:0 7px 20px rgba(34,44,68,.06); }
@@ -37,6 +41,7 @@ textarea { resize:vertical; min-height:100px; }
 .todo-main { min-width:0; flex:1; }
 .todo-title-row { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
 .todo-title { font-size:1rem; font-weight:750; margin:0; text-decoration:none; }
+.todo-title:hover { text-decoration:underline; }
 .todo-title.done { color:#8a92a4; text-decoration:line-through; }
 .todo-desc { color:#6b7385; margin:6px 0 10px; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .meta { display:flex; gap:7px; flex-wrap:wrap; align-items:center; font-size:.78rem; color:#6d7688; }

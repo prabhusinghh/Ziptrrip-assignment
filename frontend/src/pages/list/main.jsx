@@ -118,12 +118,23 @@ function TodoListPage() {
             <div className="todo-list">
               {todos.map((todo) => {
                 const overdue = todo.dueDate && !todo.completed && new Date(`${todo.dueDate}T23:59:59`) < new Date();
+                const detailUrl = `/todo.html?id=${encodeURIComponent(todo.id)}`;
                 return <article className="todo-card" key={todo.id}>
                   <input className="check" type="checkbox" checked={todo.completed} onChange={() => toggle(todo)} aria-label={`Mark ${todo.title} complete`} />
                   <div className="todo-main">
                     <div className="todo-title-row">
-                      <a className={`todo-title ${todo.completed ? 'done' : ''}`} href={`/todo.html?id=${encodeURIComponent(todo.id)}`}>{todo.title}</a>
-                      <button className="button danger" onClick={() => remove(todo)}>Delete</button>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                        <a className="pill id-pill" href={detailUrl} title="Open detail page">
+                          {todo.id}
+                        </a>
+                        <a className={`todo-title ${todo.completed ? 'done' : ''}`} href={detailUrl}>
+                          {todo.title}
+                        </a>
+                      </div>
+                      <div className="card-actions">
+                        <a className="button secondary small-btn" href={detailUrl}>View Details →</a>
+                        <button className="button danger small-btn" onClick={() => remove(todo)}>Delete</button>
+                      </div>
                     </div>
                     {todo.description && <p className="todo-desc">{todo.description}</p>}
                     <div className="meta">
