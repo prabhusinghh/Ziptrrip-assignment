@@ -3,7 +3,7 @@
     "id": "todo-001",
     "title": "Practice React interview questions",
     "description": "Revise hooks, component lifecycle, props/state, and rendering behavior.",
-    "completed": false,
+    "completed": true,
     "priority": "medium",
     "dueDate": "2026-09-03",
     "tags": [
@@ -11,20 +11,17 @@
       "interview"
     ],
     "createdAt": "2026-08-31T15:30:00.000Z",
-    "updatedAt": "2026-09-01T17:53:55.286Z"
+    "updatedAt": "2026-09-01T20:03:45.972Z"
   },
   {
-    "id": "todo-002",
-    "title": "Build Multi-Page React Todo app",
-    "description": "Ensure distinct HTML entry points and query-parameter based detail view.",
+    "id": "todo-003",
+    "title": "fdgfdfg",
+    "description": "dffxvxc",
     "completed": true,
-    "priority": "high",
+    "priority": "medium",
     "dueDate": "2026-09-03",
-    "tags": [
-      "react",
-      "assignment"
-    ],
-    "createdAt": "2026-09-01T17:54:10.383Z",
-    "updatedAt": "2026-09-01T17:54:10.383Z"
+    "tags": [],
+    "createdAt": "2026-09-01T19:50:59.085Z",
+    "updatedAt": "2026-09-01T20:03:43.608Z"
   }
 ]
