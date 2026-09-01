@@ -1,0 +1,27 @@
+[
+  {
+    "id": "todo-002",
+    "title": "Practice React interview questions",
+    "description": "Revise hooks, component lifecycle, props/state, and rendering behavior.",
+    "completed": false,
+    "priority": "medium",
+    "dueDate": "2026-09-03",
+    "tags": [
+      "react",
+      "interview"
+    ],
+    "createdAt": "2026-08-31T15:30:00.000Z",
+    "updatedAt": "2026-09-01T17:53:55.286Z"
+  },
+  {
+    "id": "3d7088c4-bd64-4c79-9eca-19c96604ad7e",
+    "title": "jbdjs",
+    "description": "sjdbf",
+    "completed": false,
+    "priority": "high",
+    "dueDate": "2026-09-03",
+    "tags": [],
+    "createdAt": "2026-09-01T17:54:10.383Z",
+    "updatedAt": "2026-09-01T17:54:10.383Z"
+  }
+]
