@@ -91,7 +91,7 @@ function TodoListPage() {
   return (
     <div className="shell">
       <header className="topbar">
-        <a className="brand" href="/index.html"><span className="brand-mark">✓</span>TaskFlow</a>
+        <a className="brand" href="/index.html"><span className="brand-mark">✓</span>To-Do-List</a>
         <span className="muted">React Multi-Page Todo</span>
       </header>
 

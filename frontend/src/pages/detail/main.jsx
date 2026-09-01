@@ -68,22 +68,22 @@ function TodoDetailPage() {
   if (!todo) return <div className="shell detail-wrap"><a className="back" href="/index.html">← Back to todos</a><div className="error-box">Todo could not be loaded.</div><Toast {...toast} /></div>;
 
   return <div className="shell detail-wrap">
-    <header className="topbar"><a className="brand" href="/index.html"><span className="brand-mark">✓</span>TaskFlow</a><span className="muted">Todo detail</span></header>
+    <header className="topbar"><a className="brand" href="/index.html"><span className="brand-mark">✓</span>To-Do-List</a><span className="muted">Todo detail</span></header>
     <a className="back" href="/index.html">← Back to all todos</a>
     <main className="panel detail-card">
       {!editing ? <>
-        <div className="detail-head"><div><div className="meta" style={{marginBottom: 9}}><span className={`pill priority-${todo.priority}`}>{todo.priority} priority</span><span className="pill">{todo.completed ? 'Completed' : 'Active'}</span></div><h1>{todo.title}</h1></div></div>
+        <div className="detail-head"><div><div className="meta" style={{ marginBottom: 9 }}><span className={`pill priority-${todo.priority}`}>{todo.priority} priority</span><span className="pill">{todo.completed ? 'Completed' : 'Active'}</span></div><h1>{todo.title}</h1></div></div>
         <div className="description-box">{todo.description || 'No description added.'}</div>
         <div className="meta">{(todo.tags || []).length ? todo.tags.map((tag) => <span className="pill" key={tag}>#{tag}</span>) : <span>No tags</span>}</div>
         <div className="info-grid">
           <div className="info"><span>Due date</span><strong>{todo.dueDate || 'Not set'}</strong></div>
-          <div className="info"><span>Todo ID (query parameter)</span><strong style={{wordBreak:'break-all'}}>{todo.id}</strong></div>
+          <div className="info"><span>Todo ID (query parameter)</span><strong style={{ wordBreak: 'break-all' }}>{todo.id}</strong></div>
           <div className="info"><span>Created</span><strong>{dateTime(todo.createdAt)}</strong></div>
           <div className="info"><span>Last updated</span><strong>{dateTime(todo.updatedAt)}</strong></div>
         </div>
         <div className="actions"><button className="button" onClick={toggle}>{todo.completed ? 'Mark active' : 'Mark complete'}</button><button className="button secondary" onClick={() => setEditing(true)}>Edit</button><button className="button danger" onClick={remove}>Delete</button></div>
       </> : <form className="form" onSubmit={save}>
-        <h2 style={{marginTop: 0}}>Edit todo</h2>
+        <h2 style={{ marginTop: 0 }}>Edit todo</h2>
         <label className="label">Title<input maxLength="120" value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} /></label>
         <label className="label">Description<textarea value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></label>
         <div className="form-row"><label className="label">Priority<select value={draft.priority} onChange={(e) => setDraft({ ...draft, priority: e.target.value })}><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></label><label className="label">Due date<input type="date" value={draft.dueDate} onChange={(e) => setDraft({ ...draft, dueDate: e.target.value })} /></label></div>
