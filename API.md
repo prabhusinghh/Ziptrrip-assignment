@@ -1,86 +1,136 @@
-# Todo API Documentation
+# Todo REST API Documentation
 
 Base URL: `http://localhost:4000/api`
 
-## Todo object
+---
+
+## Todo Object Model
 
 ```json
 {
-  "id": "uuid",
-  "title": "Prepare demo",
-  "description": "Walk through the MPA architecture",
+  "id": "todo-001",
+  "title": "Practice React interview questions",
+  "description": "Revise hooks, component lifecycle, props/state, and rendering behavior.",
   "completed": false,
-  "priority": "high",
-  "dueDate": "2026-09-05",
-  "tags": ["assignment", "react"],
-  "createdAt": "2026-09-01T10:00:00.000Z",
-  "updatedAt": "2026-09-01T10:00:00.000Z"
+  "priority": "medium",
+  "dueDate": "2026-09-03",
+  "tags": ["react", "interview"],
+  "createdAt": "2026-08-31T15:30:00.000Z",
+  "updatedAt": "2026-09-01T17:53:55.286Z"
 }
 ```
+
+---
 
 ## Endpoints
 
-### `GET /health`
-Returns API health information.
+### 1. `GET /api/health`
+Checks API server status.
 
-### `GET /todos`
-Returns todos. Optional query parameters:
-
-| Parameter | Values | Purpose |
-|---|---|---|
-| `q` | text | Search title, description and tags |
-| `status` | `all`, `active`, `completed` | Completion filter |
-| `priority` | `all`, `low`, `medium`, `high` | Priority filter |
-| `sort` | `created-desc`, `created-asc`, `due-asc`, `priority-desc` | Sorting |
-
-Example response:
-
+**Response `(200 OK)`**:
 ```json
 {
-  "items": [],
-  "total": 0
+  "status": "ok",
+  "timestamp": "2026-09-02T01:00:00.000Z"
 }
 ```
 
-### `GET /todos/:id`
-Returns one todo or `404` if it does not exist.
+---
 
-### `POST /todos`
-Creates a todo.
+### 2. `GET /api/todos`
+Returns list of todos. Supports query parameters:
 
-Example request:
+| Parameter | Type | Allowed Values | Description |
+|---|---|---|---|
+| `q` | string | any text | Search across `title`, `description`, and `tags` |
+| `status` | string | `all`, `active`, `completed` | Filter by completion state |
+| `priority` | string | `all`, `low`, `medium`, `high` | Filter by task priority |
+| `sort` | string | `created-desc`, `created-asc`, `due-asc`, `priority-desc` | Sort order |
 
+**Response `(200 OK)`**:
 ```json
 {
-  "title": "Prepare demo",
-  "description": "Explain the architecture",
+  "items": [
+    {
+      "id": "todo-001",
+      "title": "Practice React interview questions",
+      "description": "Revise hooks, component lifecycle, props/state, and rendering behavior.",
+      "completed": false,
+      "priority": "medium",
+      "dueDate": "2026-09-03",
+      "tags": ["react", "interview"],
+      "createdAt": "2026-08-31T15:30:00.000Z",
+      "updatedAt": "2026-09-01T17:53:55.286Z"
+    }
+  ],
+  "total": 1
+}
+```
+
+---
+
+### 3. `GET /api/todos/:id`
+Fetch a single todo by its ID (e.g. `todo-001`).
+
+- **Success `(200 OK)`**: Returns the todo JSON object.
+- **Not Found `(404 Not Found)`**: `{"error": "Todo not found"}`.
+
+---
+
+### 4. `POST /api/todos`
+Creates a new todo and automatically assigns the next sequential ID (`todo-XXX`).
+
+**Request Body**:
+```json
+{
+  "title": "Build Multi-Page React Todo app",
+  "description": "Ensure distinct HTML entry points and query-parameter based detail view.",
   "priority": "high",
-  "dueDate": "2026-09-05",
+  "dueDate": "2026-09-03",
   "tags": ["react", "assignment"]
 }
 ```
 
-### `PATCH /todos/:id`
-Partially updates a todo. Useful for completion toggles and edits.
+**Response `(201 Created)`**: Returns the created todo object with auto-assigned `id`, `createdAt`, and `updatedAt`.
 
-Example:
+---
 
+### 5. `PATCH /api/todos/:id`
+Partially updates specific fields of a todo (e.g., toggling completion status).
+
+**Request Body**:
 ```json
 {
   "completed": true
 }
 ```
 
-### `PUT /todos/:id`
-Replaces the editable todo fields with the provided complete payload.
+**Response `(200 OK)`**: Returns the updated todo object.
 
-### `DELETE /todos/:id`
-Deletes the todo and returns the deleted object.
+---
 
-## Validation
+### 6. `PUT /api/todos/:id`
+Replaces all editable fields of a todo.
 
-- `title` is required and limited to 120 characters.
-- `priority` must be `low`, `medium`, or `high`.
-- `completed` must be boolean when supplied.
-- `dueDate` must use `YYYY-MM-DD` when supplied.
-- `tags` must be an array; duplicates and blank tags are removed.
+---
+
+### 7. `DELETE /api/todos/:id`
+Deletes the todo from the system.
+
+**Response `(200 OK)`**:
+```json
+{
+  "message": "Todo deleted",
+  "todo": { "id": "todo-001", "title": "..." }
+}
+```
+
+---
+
+## Validation Rules
+
+- `title` is **required**, non-empty string, max 120 characters.
+- `priority` must be one of `low`, `medium`, or `high` (defaults to `medium`).
+- `completed` must be boolean when provided.
+- `dueDate` must follow `YYYY-MM-DD` format if provided.
+- `tags` must be an array of strings (duplicates and whitespace-only tags are removed automatically).
